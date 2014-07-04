@@ -3,13 +3,20 @@
 # Full guide available at http://trevorstephens.com/
 
 # Set working directory and import datafiles
-setwd("~/Kaggle/Titanic")
+# setwd("~/Kaggle/Titanic")
+options(digits = 3)
 train <- read.csv("train.csv")
 test <- read.csv("test.csv")
 
 # Look at gender patterns
 summary(train$Sex)
 prop.table(table(train$Sex, train$Survived))
+# Well that’s not very clean, the proportion table command by default takes each
+# entry in the table and divides by the total number of passengers. What we want
+# to see is the row-wise proportion, ie, the proportion of each sex that
+# survived, as separate groups. So we need to tell the command to give us
+# proportions in the 1st dimension which stands for the rows (using ‘2’ instead
+# would give you column proportions):
 prop.table(table(train$Sex, train$Survived), 1)
 
 # Create new column in test set with our prediction that everyone dies
